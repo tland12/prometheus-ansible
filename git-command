@@ -1,0 +1,11 @@
+echo "How to install Pormetheus and grafana on EC2 Instance using ansible" >> README.md
+git init
+git add *
+git commit -am "first commit"
+git branch -M main
+git remote add origin https://github.com/tland12/prometheus-ansible.git
+username: tland12
+password: token-value 
+git push -u origin main
+git push -u origin +main
+
