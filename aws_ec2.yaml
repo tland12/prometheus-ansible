@@ -1,0 +1,18 @@
+plugin: amazon.aws.aws_ec2
+regions:  
+  - us-west-2
+
+cache: true
+cache_max_age: 3600
+
+filters:
+  tag:Group:
+    - monitoring
+    - node
+  instance-state-name: running
+keyed_groups:
+  - prefix: tag
+    key: tags
+hostnames:
+  - network-interface.association.public-ip
+  - network-interface.addresses.private-ip-address

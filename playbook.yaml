@@ -1,0 +1,22 @@
+---
+- name: install node_exporter
+  hosts: tag_Group_node
+  vars:
+    ansible_ssh_common_args: 
+      -o ProxyCommand="ssh 
+      -o StrictHostKeyChecking=no 
+      -o UserKnownHostsFile=/dev/null
+      -i ~/.ssh/terraform-key.pem
+      -W %h:%p ec2-user@{{ hostvars[groups['tag_Group_monitoring'][0]]["public_ip_address"] }}"
+  become: True  
+  gather_facts: yes
+  roles:
+    - role: role/node_exporter
+    
+- name: install prometheus & grafana 
+  hosts: tag_Group_monitoring
+  become: True  
+  gather_facts: yes
+  roles: 
+    - role/prometheus
+    - role/grafana
